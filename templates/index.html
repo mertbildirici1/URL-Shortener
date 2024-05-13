@@ -3,23 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>URL Shortener</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>URL Shortener</h1>
-    <form method="post">
-        <label for="full_url">Enter URL:</label>
-        <input type="url" id="full_url" name="full_url" required>
-        <button type="submit">Shorten</button>
-    </form>
-
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
+    <div class="container">
+        <h1>URL Shortener</h1>
+        <form method="post">
+            <label for="full_url">Enter URL:</label>
+            <input type="url" id="full_url" name="full_url" placeholder="https://example.com" required>
+            <button type="submit">Shorten</button>
+        </form>
+        <div class="messages">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                    {% for message in messages %}
+                        <li><a href="{{ message }}" target="_blank">{{ message }}</a></li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
 </body>
 </html>

@@ -36,7 +36,8 @@ def index():
         cursor.execute('INSERT INTO urls (short, full) VALUES (?, ?)', (short_url, full_url))
         db.commit()
 
-        flash(f'Short URL is: {request.host_url}{short_url}')
+        short_url_full = request.host_url + short_url
+        flash(short_url_full)
         return redirect(url_for('index'))
 
     return render_template('index.html')
@@ -55,4 +56,4 @@ def redirect_url(short_url):
 
 if __name__ == '__main__':
     init_db()
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
